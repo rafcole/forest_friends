@@ -1,0 +1,14 @@
+<h2>Welcome to Forest Friends</h2>
+<p> Forest Friends is a forestry management tool to organize and track forests</p>
+<p> Each forest is divided into sections. Forests have descriptions and a unique name (per user)
+but otherwise act as an empty vessel for sections.</p> 
+<p>Objects at the section level
+have descriptions, acerage and the ability to track burn status (and associated fire dates).</p>
+
+<h3>Your account</h3>
+<p>You are currently managing</p>
+  <ul>
+   <li><%=@overview[:user_acerage_total]%> acres across <%=@overview[:user_forests_total]%> forests</li>
+   <li><%=@overview[:user_acerage_impacted] %> acres of your forests are listed as impacted by fire
+  </ul>
+<h2><a href="/forests">View forests</a></h2>

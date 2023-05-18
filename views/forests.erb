@@ -1,0 +1,54 @@
+<p><a href="/forests/create">Click here to add a forest</a></p>
+
+<h2>All forests</h2>
+  
+
+  <% if @user_forests.nil? %>
+    <p> There are no forests to display, click here to add a forest</p>
+  <% else %>
+    
+    <p>Sort by: <a href="<%=request.path_info%>">Name</a>, <a href='<%=request.path_info + '?sort_by=impacted'%>'> Impacted Status</a>
+
+    <% @user_forests.each do |hsh| %>
+      <h3> <%== hsh[:forest_name] %> </h3>
+        <ul>
+          <li><%== hsh[:forest_description]%></li>
+          <li> Total Acerage: <%== hsh[:acerage_total] %> </li>
+          <li> Sections: <%== hsh[:sections_total] %></li>
+          <li> Status: <strong> <% if hsh[:sections_impacted] > 0 %>
+            <%== "#{hsh[:acerage_impacted]}/#{hsh[:acerage_total]} acres fire impacted" %>
+          <% else %>
+            Not impacted
+          <% end %>
+          </strong> 
+          </li>
+          <li> <a href="/forests/<%= hsh[:id] %>"> View forest </a></li>
+          <li> <a href="/forests/<%= hsh[:id] %>/edit">Edit forest </a></li>
+        </ul>
+    <% end %>
+  <% end %>
+
+<% # requires @previous_page_num, @next_page_num %>
+<% # @page_range, @requested_page_number%>
+<h3>Navigation</h3>
+<p><% unless @previous_page_num.nil? || @previous_page_num == 0 %>
+      <a href="<%="?page=#{@previous_page_num}" %>">
+    <% end %>
+      Previous Page</a>
+
+    <% @page_range.each do |page_num|%>
+      <% if page_num == @requested_page_number %>
+        <strong><%=page_num%></strong>
+      <% else %>
+        <% link = "?page=#{page_num}" %>
+        <% link = link + "&sort_by=impacted" if params['sort_by'] == 'impacted' %>
+        <a href="<%=link%>"><%=page_num%></a>
+      <% end %>
+    <%end%> 
+    <% if @next_page_num %> 
+      <% link = "?page=#{@next_page_num}" %>
+      <% link = link + "&sort_by=impacted" if params['sort_by'] == 'impacted' %>
+      <a href="<%=link%>">
+    <% end %>
+      Next Page</a>
+</p>

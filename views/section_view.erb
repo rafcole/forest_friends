@@ -1,0 +1,18 @@
+<div>
+  <h1>Section: <%=@section[:section_name]%></h3>
+  <ul>
+    <li><strong>Forest:</strong> <a href="/forests/<%=@forest_id%>"><%=@forest_name%></a>
+    <li><strong>Acerage:</strong> <%=@section[:acerage]%></li>
+    <li><strong>Status:</strong> <%=@section[:impacted] ? "Impacted by fire" : "Not impacted" %></li>
+    <% if @section[:impacted] %>
+      <li><strong>Impact date:</strong> <%=@section[:impact_date]%></li>
+    <% end %>
+    <li><strong>Description:</strong> <%=@section[:section_description]%></li>
+    <li><a href="/forests/<%=@forest_id%>/sections/<%=@section_id%>/edit">Edit this section</a></li>
+  </ul>
+  <div>
+    <form method="post" action="/forests/<%=@forest_id%>/sections/<%=@section_id%>/delete">
+      <button type="submit">Delete section</button>
+    </form>
+  </div>  
+</div>

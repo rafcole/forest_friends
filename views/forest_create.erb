@@ -1,0 +1,19 @@
+<form method="post" action="/forests/create">
+  <div>
+    <label for="forest_name"> Forest Name:
+      <input name="forest_name" id="forest_name" value="<%= @valid_input ? @valid_input[:forest_name] : nil %>"/>
+    </label>
+    <% if @invalid_input %>
+      <p style="color:red;"><%=@invalid_input[:forest_name] %></p>
+    <% end %>
+  </div>
+  <div>
+   <label for="forest_description"> Description: 
+    <textarea name="forest_description" id="forest_description" rows="4" cols="50" value="<%= @valid_input ? @valid_input[:forest_description] : nil %>" ><%= @valid_input ? @valid_input[:forest_description] : nil %></textarea>
+   </label>
+    <% if @invalid_input %>
+      <p style="color:red;"><%=@invalid_input[:forest_description] %></p>
+    <% end %>
+  </div>
+  <button type="submit">Create forest</button>
+</form>

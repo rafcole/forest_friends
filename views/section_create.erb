@@ -1,0 +1,51 @@
+<h1> Create Section for "<a href="/forests/<%=@forest_id%>"><%= forest_name(@forest_id)%></a>"</h1>
+
+<form method="post" action="/forests/<%=@forest_id%>/sections/create">
+  <div>
+    <label for="section_name"><%="Section name:".ljust(40)%></label>
+      <input name="section_name" id="section_name" value="<%=@valid_input[:section_name] %>">
+    <% if @invalid_input[:section_name] %>
+        <p style="color:red;">Invalid input: <%= @invalid_input[:section_name] %></p>
+    <% end %>
+
+  </div>
+
+  <div>
+    <label for="acerage"><%="Acerage:".ljust(40)%></label>
+      <input type="number" name="acerage" step="0.1" min="0.1" id="acerage" value="<%=@valid_input[:acerage]%>">
+    <% if @invalid_input[:acerage] %>
+        <p style="color:red;">Invalid input: <%= @invalid_input[:acerage] %></p>
+    <% end %>
+  </div>
+
+  <div>
+    <label for="impacted"><%="Impacted by fire:".ljust(40)%></label>
+    <input type="checkbox" id="impacted" name="impacted" 
+      <% if @valid_input[:impacted] %>
+        checked
+      <% end %>
+      >
+    <% if @invalid_input[:impacted] %>
+        <p style="color:red;">Invalid input: <%= @invalid_input[:impacted] %></p>
+    <% end %>
+      
+  </div>
+
+  <div>
+    <label for="impact_date"><%="Date of fire:".ljust(40)%></label>
+      <input type="date" id="impact_date" name="impact_date" max=<%=Date.today.to_s%> value="<%= @valid_input[:impact_date]%>">
+      <% if @invalid_input[:impact_date] %>
+        <p style="color:red;">Invalid input: <%= @invalid_input[:impact_date] %></p>
+      <% end %>
+  </div>
+
+  <div>
+   <label for="section_description"><%="Description:".ljust(40)%></label>
+    <textarea name="section_description" id="section_description" rows="4" cols="50" value="<%= @valid_input[:section_description] %>" ><%= @valid_input[:section_description] %></textarea>
+    <% if @invalid_input[:section_description] %>
+        <p style="color:red;">Invalid input: <%= @invalid_input[:section_description] %></p>
+    <% end %>
+  </div>
+  <br>
+  <button type="submit">Create section</button>
+</form>

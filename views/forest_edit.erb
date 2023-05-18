@@ -1,0 +1,24 @@
+<form method="post" action="/forests/<%=@forest_id%>/edit">
+  <div>
+    <label for="forest_name"> Forest Name:    
+      <input name="forest_name" id="forest_name" value="<%= @valid_input[:forest_name] %>">
+    </label>
+    <% if @invalid_input[:forest_name] %>
+      <p style="color:red;"><%=@invalid_input[:forest_name] %></p>
+    <% end %>
+  </div>
+  <div>
+   <label for="forest_description"> Description</label>
+    <textarea name="forest_description" id="forest_description" rows="4" cols="50" value="<%= @valid_input[:forest_description] %>" ><%== @valid_input[:forest_description] %></textarea>
+    <% if @invalid_input[:forest_description] %>
+      <p style="color:red;"><%=@invalid_input[:forest_description] %></p>
+    <% end %>
+  </div>
+  <button type="submit">Submit changes</button>
+</form>
+
+<form class="delete" method="post" action="/forests/<%=@forest_id%>/delete">
+  <label for="delete_button">
+    <button type="submit">Delete forest</button>
+  </label>
+</form>

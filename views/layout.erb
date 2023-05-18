@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Forest Friends</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Sans">
+    <link rel="stylesheet" href="/stylesheets/whitespace-reset.css">
+    <link rel="stylesheet" href="/stylesheets/application.css">
+    <script src="/javascripts/jquery-2.1.4.js"></script>
+    <script src="/javascripts/application.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Forest Friends</h1>
+      <% unless request.path == '/' %>
+        <p><a href="/">Return home</a></p>
+      <% end %>
+    </header>
+
+    <% if session[:message] %>
+      <div class="flash error">
+        <p><%='#' * 50 %></p>
+        <p><%== session.delete(:message) %></p>
+        <p><%='#' * 50 %></p>
+      </div>
+    <% end %>
+
+    <% if session[:error] %>
+      <div class="flash error">
+        <p><%='#' * 50 %></p>
+        <p><%== session.delete(:error) %></p>
+        <p><%='#' * 50 %></p>
+      </div>
+    <% end %>
+
+    <% if session[:success] %>
+      <div class="flash success">
+        <p><%='#' * 50 %></p>
+        <p><%== session.delete(:success)%></p>
+        <p><%='#' * 50 %></p>
+      </div>
+    <% end %>
+
+    <main>
+      <%== yield %>
+    </main>
+
+    <div>
+      <% if session[:user]%>
+        <p>Logged in as <%=session[:user][:name]%> - <a href="/signout">log out</a></p>
+      <% else %>
+        <p>Currently logged out</p>
+      <% end %>
+    </div>
+  </body>
+</html>
